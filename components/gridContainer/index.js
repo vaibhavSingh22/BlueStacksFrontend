@@ -90,7 +90,7 @@ const Table = props => {
                                                 {showCalendar === row.id && <Calendar onChange={val => {
                                                     handleCalendarChange(val, row.id)
                                                 }} 
-                                                className={style.reactCalen} />}
+                                                className={`${style.reactCalen} tablecalen`} />}
                                             </div>
                                         </div>
                                     </td>

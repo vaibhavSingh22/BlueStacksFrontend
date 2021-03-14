@@ -16,6 +16,10 @@ export default function Home(props) {
       .catch(err => console.log(err));
   }, [])
 
+  /**
+   * filteredCampaings is an array containing data objects 
+   * filtered according to type of campaigns to be displayed
+   */
   const filteredCampaings = serverData.filter(data => {
     const currentDate = Date.now()
     let shouldFilter = false;
@@ -28,6 +32,7 @@ export default function Home(props) {
     }
     return shouldFilter;
   })
+  
   return (
     <div className={styles.container}>
       <Head>
