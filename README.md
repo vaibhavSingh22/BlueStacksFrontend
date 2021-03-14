@@ -22,4 +22,4 @@ You can change the Date for campaigns by clicking on Schedule Again link. This o
 
 ## Why Next.js
 
-Next.js provided an easier solution to setup Css Modules and also provide support for creating API out of the Box.
+Next.js provides an easy solution to setup css Modules and also provide support for creating API out of the Box.
