@@ -1,65 +1,45 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import Navbar from "../components/navbar/navbar";
+import { useEffect, useState } from "react";
+import { campaignType } from "../utils/constants"
+import TabRow from '../components/tabs/tabRow';
+import Table from '../components/gridContainer';
 
-export default function Home() {
+export default function Home(props) {
+  const [serverData, updateServerData] = useState([]);
+  const [campaign, setCampaign] = useState(campaignType[0]);
+  useEffect(() => {
+    fetch(`/api/hello`)
+      .then(res => res.json())
+      .then(res => updateServerData(res.data))
+      .catch(err => console.log(err));
+  }, [])
+
+  const filteredCampaings = serverData.filter(data => {
+    const currentDate = Date.now()
+    let shouldFilter = false;
+    if(campaign.id === "UPCOMING"){
+      shouldFilter = data.createdOn > currentDate
+    }else if(campaign.id === "LIVE"){
+      shouldFilter = new Date(currentDate).toDateString() == new Date(data.createdOn).toDateString();
+    }else {
+      shouldFilter = data.createdOn < currentDate && new Date(currentDate).toDateString() !== new Date(data.createdOn).toDateString()
+    }
+    return shouldFilter;
+  })
   return (
     <div className={styles.container}>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+      <Navbar />
+      <main className={styles.mainWrapper}>
+        <div className={styles.title}>Manage Campaigns</div>
+          <TabRow data={campaignType} selected={campaign} select={setCampaign} />
+          <Table data={serverData} filteredData={filteredCampaings} updateServerData={updateServerData} />
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
   )
 }

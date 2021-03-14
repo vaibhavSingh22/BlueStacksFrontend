@@ -1,0 +1,84 @@
+
+.table{
+    margin-top: 40px;
+}
+
+.tableHeader{
+    height: 48px;
+    background-color: #F1F1F4;
+}
+.tableHeader > th {
+    padding: 0 20px;
+    text-align: left;
+}
+.row{
+    border-bottom:  1px solid #ECECEC;;
+}
+.row > td {
+    padding: 24px 20px;
+    text-align: left;
+}
+
+.logo{
+    width: 40px;
+    height: 40px;
+    margin-right: 14px;
+}
+
+.imgWrap{
+    display: flex;
+}
+.name{
+    font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 24px;
+
+
+color: #556789;
+margin-bottom: 4px;
+}
+
+.region{
+    font-style: italic;
+font-weight: normal;
+font-size: 14px;
+line-height: 16px;
+
+color: #9CA2B7;
+}
+.actionWrap{
+    display: flex;
+    justify-content: space-between;
+}
+.containerWithIcon{
+    display: flex;
+    align-items: center;
+}
+.iconCont{
+    margin-right: 6px;
+}
+.text_normal_med{
+    font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 16px;
+
+color: #7788A3;
+}
+
+.text_normal_large{
+    font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 24px;
+color: #2B416C;
+}
+
+.text_italic_large{
+    font-style: italic;
+font-weight: normal;
+font-size: 14px;
+line-height: 24px;
+color: #7788A3;
+}

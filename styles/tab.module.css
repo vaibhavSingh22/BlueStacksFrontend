@@ -1,0 +1,17 @@
+.tab{
+font-style: normal;
+font-weight: normal;
+font-size: 18px;
+line-height: 28px;
+color: #556789;
+padding: 0 16px 11px;
+}
+
+.selected{
+    color: #83A515;
+    border-bottom: 4px solid #83A515;
+}
+.row{
+    display: flex;
+    border-bottom: 1px solid #F1F1F4;
+}

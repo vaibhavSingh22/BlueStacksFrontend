@@ -1,0 +1,35 @@
+.container{
+    position: sticky;
+    width: 100%;
+    height: 80px;
+    left: 0px;
+    top: 0px;
+    background: #1F2640;
+    display: flex;
+    align-items: center;
+}
+.navbarWrapper{
+    margin-left: 12%;
+}
+
+@media (min-width: 1200px){
+    .navbarWrapper {
+        max-width: 1200px;
+    }
+}
+
+@media (min-width: 992px){
+    .navbarWrapper {
+        max-width: 100%;
+    }
+}
+@media (min-width: 768px){
+    .navbarWrapper {
+        max-width: 720px;
+    }
+}
+@media (min-width: 576px){
+    .navbarWrapper {
+        max-width: 540px;
+    }
+}
