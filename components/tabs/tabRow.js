@@ -10,7 +10,7 @@ const TabRows = props => {
         select
     } = props;
     return (
-        <div className={style.row}>
+        <div className={`${style.row} rowMedia`}>
             {data.map(tab => <Tab selected={selected} data={tab} select={select}/>)}
         </div>
     )
