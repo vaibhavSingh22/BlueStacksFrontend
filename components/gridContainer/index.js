@@ -3,6 +3,8 @@ import style from "../../styles/table.module.css";
 import { formattedDate, getSvg } from "../../utils/helper";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import Modal from "../modal";
+import Card from "../campaingCard";
 
 const Table = props => {
     const {
@@ -13,9 +15,10 @@ const Table = props => {
 
 
     const [showCalendar, setshowCalendar] = useState(undefined);
+    const [showModal, setShowModal] = useState(!1)
+    const [selected, setSelected] = useState({})
 
     const handleCalendarChange = (val, id) => {
-        console.log(new Date(val).getTime(),id,data)
         const changedServerData = data.map(element => {
              const newObj = {...element};
              if(newObj.id === id){
@@ -26,29 +29,18 @@ const Table = props => {
         updateServerData(changedServerData);
         setshowCalendar(undefined);
     }
+    const modalClosehandler = () => {
+        setShowModal(!1);
+        setSelected({});
+    }
     return (
+        <>
         <table className={style.table}>
             <tr className={style.tableHeader}>
-                <th>
-                    <div>
-                        DATE
-                    </div>
-                </th>
-                <th>
-                    <div>
-                        CAMPAIGN
-                    </div>
-                </th>
-                <th>
-                    <div>
-                        VIEW
-                    </div>
-                </th>
-                <th>
-                    <div>
-                        ACTIONS
-                    </div>
-                </th>
+                <th><div>DATE</div></th>
+                <th><div>CAMPAIGN</div></th>
+                <th><div>VIEW</div></th>
+                <th><div>ACTIONS</div></th>
             </tr>
 
             {
@@ -72,7 +64,10 @@ const Table = props => {
                             <td>
                             <div className={style.containerWithIcon}>
                                     <span className={style.iconCont}>{getSvg("PRICE")}</span>
-                                    <span className={style.text_normal_med}>View Pricing</span>
+                                    <span className={style.text_normal_med} onClick={_=>{
+                                        setShowModal(!0);
+                                        setSelected(row);
+                                    }}>View Pricing</span>
                                 </div>
                             </td>
                             <td>
@@ -102,6 +97,12 @@ const Table = props => {
             }
 
         </table>
+        {showModal && (
+        <Modal onClose={modalClosehandler}>
+            <Card data={selected}/>
+        </Modal>
+        )}
+        </>
     )
 }
 
