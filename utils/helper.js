@@ -1,6 +1,7 @@
+import {texts} from "./texts";
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
-export const formattedDate = createdDate => {
+export const formattedDate = (createdDate, lang) => {
     const dateObj = new Date(createdDate);
     const month = months[dateObj.getMonth()];
     const year = dateObj.getFullYear();
@@ -12,7 +13,8 @@ export const formattedDate = createdDate => {
 
     return {
         createdAt: `${month} ${year}, ${date}`,
-        timeDiff: `${new Date(currentDate).toDateString() == new Date(createdDate).toDateString() ? "Today" : `${diffDays} Days ${ currentDate > createdDate ?  `Ago` : 'Ahead'}`}`
+        timeDiff: `${new Date(currentDate).toDateString() == new Date(createdDate).toDateString() ? 
+                    `${texts[lang]["TODAY"]}` : `${diffDays} ${texts[lang]["DAYS"]} ${ currentDate > createdDate ?  `${texts[lang]["AGO"]}` : `${texts[lang]["AHEAD"]}`}`}`
     }
 }
 

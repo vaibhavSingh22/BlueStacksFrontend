@@ -66,6 +66,11 @@ table{
 	td:nth-of-type(3):before { content: "VIEW"; }
 	td:nth-of-type(4):before { content: "ACTIONS"; }
 
+	.GER td:nth-of-type(1):before { content: "DATUM"; }
+	.GER td:nth-of-type(2):before { content: "KAMPAGNE"; }
+	.GER td:nth-of-type(3):before { content: "AUSSICHT"; }
+	.GER td:nth-of-type(4):before { content: "AKTIONEN"; }
+
   .rowMedia{
     display: block !important;
         border-bottom: none !important;

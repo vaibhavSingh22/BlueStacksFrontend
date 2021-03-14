@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import style from "../../styles/Cards.module.css";
+import {LocalizationContext} from "../../context/localizationContext";
+import { texts } from "../../utils/texts";
 
 const Card = props => {
     const {
         data
     } = props;
+    const langContext = useContext(LocalizationContext);
     return(
         <div className={style.cardWrapper}>
             <div className={style.imgWrapper}>
@@ -15,7 +18,7 @@ const Card = props => {
                 </div>
             </div>
             <div className={style.infoWrapper}>
-                <div className={style.priceHead}>Pricing</div>
+                <div className={style.priceHead}>{texts[langContext]["PRICING"]}</div>
                 <div>
                     {Object.keys(data.price).map(item => {
                         return(

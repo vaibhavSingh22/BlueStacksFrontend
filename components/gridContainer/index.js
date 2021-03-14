@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import style from "../../styles/table.module.css";
 import { formattedDate, getSvg } from "../../utils/helper";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import Modal from "../modal";
 import Card from "../campaingCard";
+import {LocalizationContext} from "../../context/localizationContext";
+import { texts } from "../../utils/texts";
 
 const Table = props => {
     const {
@@ -13,7 +15,7 @@ const Table = props => {
         updateServerData = () => { }
     } = props;
 
-
+    const langContext = useContext(LocalizationContext);
     const [showCalendar, setshowCalendar] = useState(undefined);
     const [showModal, setShowModal] = useState(!1)
     const [selected, setSelected] = useState({})
@@ -38,16 +40,16 @@ const Table = props => {
             <table className={style.table}>
                 <thead>
                     <tr className={style.tableHeader}>
-                        <th><div>DATE</div></th>
-                        <th><div>CAMPAIGN</div></th>
-                        <th><div>VIEW</div></th>
-                        <th><div>ACTIONS</div></th>
+                        <th><div>{texts[langContext]["DATE"]}</div></th>
+                        <th><div>{texts[langContext]["CAMPAIGN"]}</div></th>
+                        <th><div>{texts[langContext]["VIEW"]}</div></th>
+                        <th><div>{texts[langContext]["ACTIONS"]}</div></th>
                     </tr>
                 </thead>
                 <tbody>
                     {
                         filteredData.map(row => {
-                            const { createdAt, timeDiff } = formattedDate(row.createdOn);
+                            const { createdAt, timeDiff } = formattedDate(row.createdOn, langContext);
                             return (
                                 <tr className={style.row}>
                                     <td>
@@ -69,24 +71,24 @@ const Table = props => {
                                             <span className={style.text_normal_med} onClick={_ => {
                                                 setShowModal(!0);
                                                 setSelected(row);
-                                            }}>View Pricing</span>
+                                            }}>{texts[langContext]["VIEW_PRICING"]}</span>
                                         </div>
                                     </td>
                                     <td>
                                         <div className={`${style.actionWrap} actions`}>
                                             <div className={style.containerWithIcon}>
                                                 <span className={style.iconCont}>{getSvg("FILE")}</span>
-                                                <span className={style.text_normal_med}>CSV</span>
+                                                <span className={style.text_normal_med}>{texts[langContext]["CSV"]}</span>
                                             </div>
                                             <div className={style.containerWithIcon}>
                                                 <span className={style.iconCont}>{getSvg("REPORT")}</span>
-                                                <span className={style.text_normal_med}>Report</span>
+                                                <span className={style.text_normal_med}>{texts[langContext]["REPORT"]}</span>
                                             </div>
                                             <div className={style.containerWithIcon}>
                                                 <span className={style.iconCont}>{getSvg("CALENDAR")}</span>
                                                 <span className={style.text_normal_med} onClick={_ => {
                                                     setshowCalendar(row.id);
-                                                }}>Schedule Again</span>
+                                                }}>{texts[langContext]["SCHEDULE_AGAIN"]}</span>
                                                 {showCalendar === row.id && <Calendar onChange={val => {
                                                     handleCalendarChange(val, row.id)
                                                 }} 
